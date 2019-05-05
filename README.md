@@ -6,6 +6,7 @@ Pre Requisite
 1. Enter docker-compose up to start up kong servers
 2. Kong admin url can be accessed over localhost:8001
 3. Konga UI can be accessed over localhost:1337
+	Access http://localhost:1337/#!/connections and add the kong admin URL -> http://host.docker.internal:8001
 4. Enter the below commands provided you have the API or service in https://github.com/suhaimsyed/springbootmaven up and running
 ```
 	Add your Service using the Admin API
