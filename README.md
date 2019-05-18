@@ -10,7 +10,7 @@ Pre Requisite
 4. Enter the below commands provided you have the API or service in https://github.com/suhaimsyed/springbootmaven up and running
 ```
 	Add your Service using the Admin API
-	curl -i -X POST  --url http://localhost:8001/services/   --data 'name=cart-service'   --data 'url=http://host.docker.internal:8080/api/carts/7'
+	curl -i -X POST  --url http://localhost:8001/services/   --data 'name=cart-service-spring'   --data 'url=http://host.docker.internal:8080/api/carts/7'
 
 	For Linux machines :-
 	"until host.docker.internal is working for every platform you can use my container acting as a NAT gateway without any manually setup https://github.com/qoomon/docker-host
@@ -19,7 +19,7 @@ Pre Requisite
 
 ```
 Add a Route for the Service
-curl -i -X POST   --url http://localhost:8001/services/cart-service/routes   --data 'hosts[]=getcart.com'
+curl -i -X POST   --url http://localhost:8001/services/cart-service-spring/routes   --data 'hosts[]=getcart.com'
 ```
 
 ```
@@ -29,7 +29,7 @@ curl -i -X GET   --url http://localhost:8000/ \  --header 'Host: getcart.com'
 
 ```
 Configure the key-auth plugin
-curl -i -X POST   --url http://localhost:8001/services/cart-service-1/plugins/   --data 'name=key-auth'
+curl -i -X POST   --url http://localhost:8001/services/cart-service-spring/plugins/   --data 'name=key-auth'
 ```
 ```
 Create a Consumer through the RESTful API
@@ -48,7 +48,7 @@ curl -i -X GET   --url http://localhost:8000   --header "Host: getcart.com"   --
 
 ```
 To transform the respone run the below command
-curl -X POST http://localhost:8001/services/cart-service/plugins \
+curl -X POST http://localhost:8001/services/cart-service-spring/plugins \
     --data "name=response-transformer"  \
     --data "config.remove.headers=Date" \
     --data "config.remove.json=shippingAddress" \
@@ -60,13 +60,13 @@ curl -X POST http://localhost:8001/services/cart-service/plugins \
 
 ```
 To terminate the API enter the below command
-curl -X POST http://localhost:8001/services/cart-service/plugins  --data "name=request-termination"     --data "config.status_code=403"     --data "config.message=Sorryy mate its shut down"
+curl -X POST http://localhost:8001/services/cart-service-spring/plugins  --data "name=request-termination"     --data "config.status_code=403"     --data "config.message=Sorryy mate its shut down"
 ```
 
 
 ```
 To limit the rate of calls to the service enter the below command
-curl -X POST http://localhost:8001/services/cart-service/plugins  --data "name=rate-limiting"    --data "config.minute=2" 
+curl -X POST http://localhost:8001/services/cart-service-spring/plugins  --data "name=rate-limiting"    --data "config.minute=2" 
 ```
 
 
