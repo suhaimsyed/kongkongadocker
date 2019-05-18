@@ -58,4 +58,16 @@ curl -X POST http://localhost:8001/services/cart-service/plugins \
 
 ```
 
+```
+To terminate the API enter the below command
+curl -X POST http://localhost:8001/services/cart-service/plugins  --data "name=request-termination"     --data "config.status_code=403"     --data "config.message=Sorryy mate its shut down"
+```
+
+
+```
+To limit the rate of calls to the service enter the below command
+curl -X POST http://localhost:8001/services/cart-service/plugins  --data "name=rate-limiting"    --data "config.minute=2" 
+```
+
+
 5. View the services and routes in konga UI
