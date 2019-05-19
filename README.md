@@ -93,6 +93,8 @@ curl -X POST http://localhost:8001/consumers/testuser/basic-auth \
     --data "username=ironman" \
     --data "password=tony"
 
+base64(ironman:tony) =aXJvbm1hbjp0b255
+
 Verify the same with 
 curl http://localhost:8000/services/store-service-gql     -H 'Authorization: Basic aXJvbm1hbjp0b255'
 
