@@ -62,35 +62,29 @@ transformations, and more through plugins.
 For more info about plugins and integrations, you can check out the [Kong
 Hub](https://docs.konghq.com/hub/).
 
-## Distributions
 
-Kong comes in many shapes. While this repository contains its core's source
-code, other repos are also under active development:
 
-- [Kong Docker](https://github.com/Kong/docker-kong): A Dockerfile for
-  running Kong in Docker.
-- [Kong Packages](https://github.com/Kong/kong/releases): Pre-built packages
-  for Debian, Red Hat, and OS X distributions (shipped with each release).
-- [Kong Vagrant](https://github.com/Kong/kong-vagrant): A Vagrantfile for
-  provisioning a development-ready environment for Kong.
-- [Kong Homebrew](https://github.com/Kong/homebrew-kong): Homebrew Formula
-  for Kong.
-- [Kong CloudFormation](https://github.com/Kong/kong-dist-cloudformation):
-  Kong in a 1-click deployment for AWS EC2
-- [Kong AWS AMI](https://aws.amazon.com/marketplace/pp/B06WP4TNKL): Kong AMI on
-  the AWS Marketplace.
-- [Kong on Microsoft Azure](https://github.com/Kong/kong-dist-azure): Run Kong
-  using Azure Resource Manager.
-- [Kong on Heroku](https://github.com/heroku/heroku-kong): Deploy Kong on
-  Heroku in one click.
-- [Kong and Instaclustr](https://www.instaclustr.com/solutions/managed-cassandra-for-kong/): Let
-  Instaclustr manage your Cassandra cluster.
-- [Kubernetes Ingress Controller for Kong](https://github.com/Kong/kubernetes-ingress-controller):
-  Use Kong for Kubernetes Ingress.
-- [Nightly Builds][kong-nightly-master]: Builds of the master branch available
-  every morning at about 9AM PST.
+
+
+## Database Support
+
+As mentioned, Kong stores your configuration in a backend data store, either PostgreSQL or Cassandra. You configure Kong using a API. If you’re a user of the community version, you need to either interact with the RESTful API directly via HTTP requests using a tool like curl, or via a third-party GUI like Konga. The officially supported Kong admin GUI is for Kong Enterprise subscribers only.
+
+## Plugin support
+
+Kong is built on top of NGINX, which means Kong plugins must be written in Lua using the lua-nginx-module. Unfortunately, Kong does not have official support for writing plugins in nginScript, NGINX’s unique JavaScript runtime. It should also be noted that the Lua language doesn’t have sufficient adoption to make either the Github or Linkedin lists mentioned previously.
+
+## Summary
+
+Kong has a compelling story around performance and reliability because it is built on top of NGINX. That being said, it also exhibits some potentially cumbersome dependencies. Kong’s extensibility can be viewed as limited because the custom plugins must be written in Lua. Furthermore, using Kong also requires you to adopt either PostgreSQL or Cassandra, which is troubling if you have no experience with either database. Finally, Kong is configured entirely through an admin GUI rather than a configuration file, so tracking configuration in a source version control system like Git is difficult.
+
+
   
   
 [kong-url]: https://konghq.com/
 [kong-logo]: https://konghq.com/wp-content/uploads/2018/05/kong-logo-github-readme.png
 [kong-benefits]: https://konghq.com/wp-content/uploads/2018/05/kong-benefits-github-readme.png
+
+References :
+https://www.lunchbadger.com/api-gateway-comparison-kong-enterprise-pricing-vs-express-gateway/
+https://github.com/Kong/kong/edit/master/README.md
