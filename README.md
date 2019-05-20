@@ -125,4 +125,18 @@ curl -i -X POST http://localhost:8001/services/store-service-gql/plugins \
       -d "config.enforce_headers=date, request-line" \
       -d "config.algorithms=hmac-sha1, hmac-sha256"
 ```
+
+
+```
+To add JWT tokens
+curl -X POST http://localhost:8001/consumers/testuser/jwt -H "Content-Type: application/x-www-form-urlencoded"
+curl -X POST http://localhost:8001/services/user-service-pyfl/plugins     --data "name=jwt" 
+curl -X GET http:/localhost/:8000/users
+-header "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJIQndYbWpwS3JIT0ZpUm03TkFOVDFyR2FNamc3SEQ3UyIsInVzZXJuYW1lIjoidGVzdHVzZXIifQ.8dudOfPxZP4NUU3OlW2RrYsxcWPT6phi1ZS5DQlNCL4"
+
+
+
+```
+
+```
 5. View the services and routes in konga UI
