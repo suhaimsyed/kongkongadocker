@@ -110,9 +110,44 @@ curl -X POST http://localhost:8001/services/store-service-gql/plugins     --data
     
  curl -X POST http://localhost:8001/consumers/testuser/oauth2 \
     --data "name=Test%20Application" \
-    --data "client_id=myclientid" \
-    --data "client_secret=mysupersecret" \
+    --data "client_id=SOME-CLIENT-ID" \
+    --data "client_secret=SOME-CLIENT-SECRET" \
     --data "redirect_uris[]=http://some-domain/endpoint/"
+   
+ curl -X POST \
+  --url "https://localhost:8443/user-service-pyfl/oauth2/authorize" \
+  --header "Host: getuser.com" \
+  --data "response_type=code" \
+  --data "client_id=SOME-CLIENT-ID" \
+  --data "scope=email" \
+  --data "authenticated_userid=testuser" \
+  --data "provision_key=a2HagWoPahLtW6uQ2xKsqCMV1avc4hZh" \
+  --insecure  
+  
+  In response you would get a code which can be used below
+  {
+    "redirect_uri": "http://some-domain/endpoint/?code=fucx0wbtHIXhxrtIAf1NZDkra4nepGv8"
+}
+   
+  curl -X POST \
+  --url "https://localhost:8443/user-service-pyfl/oauth2/token" \
+  --header "Host: getuser.com" \
+  --data "grant_type=authorization_code" \
+  --data "client_id=SOME-CLIENT-ID" \
+  --data "client_secret=SOME-CLIENT-SECRET" \
+  --data "redirect_uri=http://some-domain/endpoint/" \
+  --data "code=Yj5z3ZH1Cc20pT9pgLoi0AbUp1QjcgWR" \
+  --insecure  
+  {
+    "refresh_token": "VffLxdutgcySa9dMuVqwz691j3fpSv95",
+    "token_type": "bearer",
+    "access_token": "ZbAVsA5qzhiJo1E4qbJMzoTDsYwDCl3v",
+    "expires_in": 7200
+}
+
+curl -X GET http://kongapi.ddns.net:8000/users -header "Host: getuser.com" \
+"Authorization:bearer ZbAVsA5qzhiJo1E4qbJMzoTDsYwDCl3v"
+    
 ```
 
 ```
