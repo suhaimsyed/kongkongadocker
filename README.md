@@ -124,6 +124,23 @@ curl -i -X POST http://localhost:8001/services/store-service-gql/plugins \
       -d "name=hmac-auth" \
       -d "config.enforce_headers=date, request-line" \
       -d "config.algorithms=hmac-sha1, hmac-sha256"
+
+
+export BODY="a small body"
+export DATE=$(date -u +%a,\ %d\ %b\ %Y\ %H:%M:%S\ GMT)
+export HMAC_MESSAGE=$(echo "host: getuser.com" ; echo -n "date: $DATE")
+export SIGNATURE=$( echo -n "$HMAC_MESSAGE" | openssl sha -binary -sha256 -hmac secret | base64)
+export DIGEST=$(echo -n "$BODY" | openssl sha -binary -sha256 | base64)
+echo $DATE
+echo $HMAC_MESSAGE
+echo $SIGNATURE
+echo $DIGEST
+curl -i -X GET http://localhost:8000/users \
+      -H "host: getuser.com" \
+      -H "date: $DATE" \
+      -H "digest: SHA-256=$DIGEST" \
+      -H "authorization: hmac username=\"testuser\", algorithm=\"hmac-sha256\", headers=\"host date\", signature=\"$SIGNATURE\"" \
+      -d "$BODY"
 ```
 
 
