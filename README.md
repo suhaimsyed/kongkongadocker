@@ -11,7 +11,7 @@ Pre Requisite
 bootmaven up and running
 ```
 	Add your Service using the Admin API
-	curl -i -X POST  --url http://localhost:8001/services/   --data 'name=cart-service-spbt'   --data 'url=http://host.docker.internal:8080/api/carts/7'
+	curl -i -X POST  --url http://localhost:8001/services/   --data 'name=cart-service-spbt'   --data 'url=http://host.docker.internal:8082/api/carts/7'
 
 	For Linux machines :-
 	"until host.docker.internal is working for every platform you can use my container acting as a NAT gateway without any manually setup https://github.com/qoomon/docker-host
